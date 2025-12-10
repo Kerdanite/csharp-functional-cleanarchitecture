@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\AspireCsharpFunctional.ApiService\AspireCsharpFunctional.ApiService.csproj" />
-    <ProjectReference Include="..\AspireCsharpFunctional.Web\AspireCsharpFunctional.Web.csproj" />
   </ItemGroup>
 
   <ItemGroup>

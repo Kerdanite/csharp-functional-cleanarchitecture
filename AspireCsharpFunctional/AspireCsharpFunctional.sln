@@ -8,8 +8,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireCsharpFunctional.Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireCsharpFunctional.ApiService", "AspireCsharpFunctional.ApiService\AspireCsharpFunctional.ApiService.csproj", "{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireCsharpFunctional.Web", "AspireCsharpFunctional.Web\AspireCsharpFunctional.Web.csproj", "{54B7972D-C613-50C6-AC25-7602BD9D44FB}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,10 +26,6 @@ Global
 		{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{54B7972D-C613-50C6-AC25-7602BD9D44FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{54B7972D-C613-50C6-AC25-7602BD9D44FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{54B7972D-C613-50C6-AC25-7602BD9D44FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{54B7972D-C613-50C6-AC25-7602BD9D44FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
