@@ -14,11 +14,11 @@ public sealed class CreateClientCommandHandler : ICommandHandler<CreateClientCom
         _clientRepository = clientRepository;
     }
 
-    public async Task<Result> Handle(CreateClientCommand command, CancellationToken ct = default)
+    public async Task<Result> Handle(CreateClientCommand command, CancellationToken cancellationToken)
     {
         return await Result.Success()
-            .Ensure(async() => await VerifyEmailNotAlreadyExists(command, ct))
-            .Ensure(async() => await VerifyPhoneNumberNotAlreadyExists(command, ct))
+            .Ensure(async() => await VerifyEmailNotAlreadyExists(command, cancellationToken))
+            .Ensure(async() => await VerifyPhoneNumberNotAlreadyExists(command, cancellationToken))
             .Bind(() =>
                 Client.Create(
                     command.FirstName,
@@ -26,15 +26,15 @@ public sealed class CreateClientCommandHandler : ICommandHandler<CreateClientCom
                     command.Email,
                     command.PhoneNumber))
             .Tap(async client =>
-                await _clientRepository.AddAsync(client, ct));
+                await _clientRepository.AddAsync(client, cancellationToken));
     }
 
-    private async Task<Result>? VerifyEmailNotAlreadyExists(CreateClientCommand command, CancellationToken ct)
+    private async Task<Result> VerifyEmailNotAlreadyExists(CreateClientCommand command, CancellationToken ct)
     {
         var exist =  await _clientRepository.EmailExistsAsync(command.Email, ct);
         return exist ? Result.Failure(DomainErrors.Client.EmailAlreadyInUse) : Result.Success();
     }
-    private async Task<Result>? VerifyPhoneNumberNotAlreadyExists(CreateClientCommand command, CancellationToken ct)
+    private async Task<Result> VerifyPhoneNumberNotAlreadyExists(CreateClientCommand command, CancellationToken ct)
     {
         var exist =  await _clientRepository.PhoneNumberExistsAsync(command.PhoneNumber, ct);
         return exist ? Result.Failure(DomainErrors.Client.PhoneNumberAlreadyInUse) : Result.Success();

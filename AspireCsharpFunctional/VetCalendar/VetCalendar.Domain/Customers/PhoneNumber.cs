@@ -16,7 +16,7 @@ public sealed record PhoneNumber
     {
         return Result.Success(phoneNumber)
             .Ensure(value => !string.IsNullOrWhiteSpace(value), DomainErrors.Client.PhoneNumberIsRequired)
-            .Map(value => value.Trim())
+            .Map(value => value!.Trim())
             .Ensure(value => Regex.IsMatch(value, @"^\+\d{6,}$"), DomainErrors.Client.PhoneNumberIsInvalid)
             .Map(value => new PhoneNumber(value));
     }

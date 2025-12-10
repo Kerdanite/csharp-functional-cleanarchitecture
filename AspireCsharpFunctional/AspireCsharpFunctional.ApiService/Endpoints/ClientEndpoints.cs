@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using VetCalendar.Application.Abstractions;
 using VetCalendar.Application.CreateClient;
 using CSharpFunctionalExtensions.HttpResults.ResultExtensions;
+using VetCalendar.Application.GetClients;
+
 namespace AspireCsharpFunctional.ApiService.Endpoints;
 
 public static class ClientEndpoints
@@ -25,6 +27,14 @@ public static class ClientEndpoints
             Result result = await handler.Handle(command, ct);
 
             return result.ToNoContentHttpResult();
+        });
+
+        group.MapGet("/", async (IQueryHandler<GetClientsQuery, IReadOnlyList<ClientDto>> handler, 
+            CancellationToken ct) =>
+        {
+            var result = await handler.Handle(new GetClientsQuery(), ct);
+
+            return result.ToOkHttpResult();
         });
 
         return app;

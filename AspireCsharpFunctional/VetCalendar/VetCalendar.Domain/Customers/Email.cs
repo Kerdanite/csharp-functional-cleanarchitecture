@@ -17,7 +17,7 @@ public sealed record Email
 
         return Result.Success(email)
             .Ensure(value => !string.IsNullOrWhiteSpace(value), DomainErrors.Client.EmailIsRequired)
-            .Map(value => value.Trim())
+            .Map(value => value!.Trim())
             .Ensure(value => Regex.IsMatch(value, @"^\S+@\S+\.\S+$"), DomainErrors.Client.EmailIsInvalid)
             .Map(value => new Email(value));
     }

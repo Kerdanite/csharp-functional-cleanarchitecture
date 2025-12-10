@@ -1,12 +1,15 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using VetCalendar.Application.Abstractions;
+using static CSharpFunctionalExtensions.Result;
 
 namespace VetCalendar.Application;
 
 public static class DependencyInjection
 {
     public static IServiceCollection AddApplication(
-        this IServiceCollection services)
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
         services.Scan(scan => scan.FromAssembliesOf(typeof(DependencyInjection))
             .AddClasses(classes => classes.AssignableTo(typeof(IQueryHandler<,>)), publicOnly: false)
@@ -17,6 +20,10 @@ public static class DependencyInjection
             .WithScopedLifetime());
 
         services.Decorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandler<>));
+        
+        var connectionString = configuration.GetConnectionString("apidb")
+                               ?? throw new InvalidOperationException("Connection string 'apidb' not found.");
+        services.AddSingleton<ISqlConnectionFactory>(_ => new SqlConnectionFactory(connectionString));
 
         return services;
     }
