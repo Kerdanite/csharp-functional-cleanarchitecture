@@ -13,6 +13,14 @@ public class CreateClientCommandHandlerTests
     public CreateClientCommandHandlerTests()
     {
         _repoMock = new Mock<IClientRepository>();
+
+        _repoMock
+            .Setup(r => r.EmailExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(false);
+        _repoMock
+            .Setup(r => r.PhoneNumberExistsAsync(It.IsAny<string>(), It.IsAny<CancellationToken>()))
+            .ReturnsAsync(false);
+
         _sut = new CreateClientCommandHandler(_repoMock.Object);
     }
 
@@ -99,6 +107,96 @@ public class CreateClientCommandHandlerTests
         // Assert
         Assert.True(result.IsFailure);
         Assert.Equal(DomainErrors.Client.EmailIsRequired, result.Error);
+
+        _repoMock.Verify(r => r.AddAsync(
+                It.IsAny<Client>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
+
+
+    [Theory]
+    [InlineData("john.doe.example.com")]
+    [InlineData("john.doe@example")]
+    public async Task Handle_MalformedEmail_ReturnsFailureAndDoesNotSaveClient(string invalidEmail)
+    {
+        var command = new CreateClientCommandBuilder()
+            .WithEmail(invalidEmail)
+            .Build();
+
+        // Act
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.True(result.IsFailure);
+        Assert.Equal(DomainErrors.Client.EmailIsInvalid, result.Error);
+
+        _repoMock.Verify(r => r.AddAsync(
+                It.IsAny<Client>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
+
+
+    [Theory]
+    [InlineData(" ", DomainErrors.Client.PhoneNumberIsRequired)]
+    [InlineData(null, DomainErrors.Client.PhoneNumberIsRequired)]
+    [InlineData("testPhoneNumber", DomainErrors.Client.PhoneNumberIsInvalid)]
+    [InlineData("06.01.02.03.04", DomainErrors.Client.PhoneNumberIsInvalid)]
+    [InlineData("0601020304", DomainErrors.Client.PhoneNumberIsInvalid)]
+    public async Task Handle_InvalidPhoneNumber_ReturnsFailureAndDoesNotSaveClient(string invalidPhoneNumber, string domainError)
+    {
+        var command = new CreateClientCommandBuilder()
+            .WithPhoneNumber(invalidPhoneNumber)
+            .Build();
+
+        // Act
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        // Assert
+        Assert.True(result.IsFailure);
+        Assert.Equal(domainError, result.Error);
+
+        _repoMock.Verify(r => r.AddAsync(
+                It.IsAny<Client>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
+
+
+    [Fact]
+    public async Task Handle_EmailAlreadyExists_ReturnsFailureAndDoesNotSaveClient()
+    {
+        var command = new CreateClientCommandBuilder().Build();
+
+        _repoMock
+            .Setup(r => r.EmailExistsAsync(command.Email, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(true);
+
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(DomainErrors.Client.EmailAlreadyInUse, result.Error);
+
+        _repoMock.Verify(r => r.AddAsync(
+                It.IsAny<Client>(),
+                It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
+
+    [Fact]
+    public async Task Handle_PhoneNumberAlreadyExists_ReturnsFailureAndDoesNotSaveClient()
+    {
+        var command = new CreateClientCommandBuilder().Build();
+
+        _repoMock
+            .Setup(r => r.PhoneNumberExistsAsync(command.PhoneNumber, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(true);
+
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(DomainErrors.Client.PhoneNumberAlreadyInUse, result.Error);
 
         _repoMock.Verify(r => r.AddAsync(
                 It.IsAny<Client>(),

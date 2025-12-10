@@ -1,4 +1,5 @@
 ﻿using CSharpFunctionalExtensions;
+using VetCalendar.Domain;
 using VetCalendar.Domain.Customers;
 
 namespace VetCalendar.Application.CreateClient;
@@ -14,19 +15,27 @@ public sealed class CreateClientCommandHandler
 
     public async Task<Result> Handle(CreateClientCommand command, CancellationToken ct = default)
     {
-        var clientResult = Client.Create(
-            command.FirstName,
-            command.LastName,
-            command.Email,
-            command.PhoneNumber);
+        return await Result.Success()
+            .Ensure(async() => await VerifyEmailNotAlreadyExists(command, ct))
+            .Ensure(async() => await VerifyPhoneNumberNotAlreadyExists(command, ct))
+            .Bind(() =>
+                Client.Create(
+                    command.FirstName,
+                    command.LastName,
+                    command.Email,
+                    command.PhoneNumber))
+            .Tap(async client =>
+                await _clientRepository.AddAsync(client, ct));
+    }
 
-        if (clientResult.IsFailure)
-            return Result.Failure(clientResult.Error);
-
-        var client = clientResult.Value;
-
-        await _clientRepository.AddAsync(client, ct);
-
-        return Result.Success();
+    private async Task<Result>? VerifyEmailNotAlreadyExists(CreateClientCommand command, CancellationToken ct)
+    {
+        var exist =  await _clientRepository.EmailExistsAsync(command.Email, ct);
+        return exist ? Result.Failure(DomainErrors.Client.EmailAlreadyInUse) : Result.Success();
+    }
+    private async Task<Result>? VerifyPhoneNumberNotAlreadyExists(CreateClientCommand command, CancellationToken ct)
+    {
+        var exist =  await _clientRepository.PhoneNumberExistsAsync(command.PhoneNumber, ct);
+        return exist ? Result.Failure(DomainErrors.Client.PhoneNumberAlreadyInUse) : Result.Success();
     }
 }
