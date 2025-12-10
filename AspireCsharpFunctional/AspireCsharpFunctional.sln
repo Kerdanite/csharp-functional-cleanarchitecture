@@ -8,6 +8,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireCsharpFunctional.Serv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireCsharpFunctional.ApiService", "AspireCsharpFunctional.ApiService\AspireCsharpFunctional.ApiService.csproj", "{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VetCalendar", "VetCalendar", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Application", "VetCalendar\VetCalendar.Application\VetCalendar.Application.csproj", "{DB3A7033-E3B3-40B5-B973-FA3506B55782}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Domain", "VetCalendar\VetCalendar.Domain\VetCalendar.Domain.csproj", "{2DF1669C-07CE-47FD-9B87-63DD0C337FE0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Infrastructure", "VetCalendar\VetCalendar.Infrastructure\VetCalendar.Infrastructure.csproj", "{A33A16A5-4B60-4CF5-BF2F-0C8F4038BA5B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VetCalendarTests", "VetCalendarTests", "{E79D431E-F30C-4CE1-B091-144ABAEDA33D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Application.Tests", "VetCalendarTests\VetCalendar.Application.Tests\VetCalendar.Application.Tests.csproj", "{85CCAAE2-5444-4B8A-8112-AC83A5331D8B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,9 +38,31 @@ Global
 		{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6E678BF-F4F6-4AD9-D1C9-2EF66A99C3D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB3A7033-E3B3-40B5-B973-FA3506B55782}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB3A7033-E3B3-40B5-B973-FA3506B55782}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB3A7033-E3B3-40B5-B973-FA3506B55782}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB3A7033-E3B3-40B5-B973-FA3506B55782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DF1669C-07CE-47FD-9B87-63DD0C337FE0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DF1669C-07CE-47FD-9B87-63DD0C337FE0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DF1669C-07CE-47FD-9B87-63DD0C337FE0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DF1669C-07CE-47FD-9B87-63DD0C337FE0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A33A16A5-4B60-4CF5-BF2F-0C8F4038BA5B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A33A16A5-4B60-4CF5-BF2F-0C8F4038BA5B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A33A16A5-4B60-4CF5-BF2F-0C8F4038BA5B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A33A16A5-4B60-4CF5-BF2F-0C8F4038BA5B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85CCAAE2-5444-4B8A-8112-AC83A5331D8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CCAAE2-5444-4B8A-8112-AC83A5331D8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85CCAAE2-5444-4B8A-8112-AC83A5331D8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85CCAAE2-5444-4B8A-8112-AC83A5331D8B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{DB3A7033-E3B3-40B5-B973-FA3506B55782} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{2DF1669C-07CE-47FD-9B87-63DD0C337FE0} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{A33A16A5-4B60-4CF5-BF2F-0C8F4038BA5B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{85CCAAE2-5444-4B8A-8112-AC83A5331D8B} = {E79D431E-F30C-4CE1-B091-144ABAEDA33D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01095D7A-36B4-40FD-9915-135FEE3F0F60}
