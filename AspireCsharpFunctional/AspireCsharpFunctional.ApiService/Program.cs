@@ -1,4 +1,6 @@
+using AspireCsharpFunctional.ApiService.Endpoints;
 using Microsoft.EntityFrameworkCore;
+using VetCalendar.Application;
 using VetCalendar.Infrastructure;
 using VetCalendar.Infrastructure.Persistence;
 
@@ -11,6 +13,7 @@ builder.AddServiceDefaults();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 
@@ -37,6 +40,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 app.MapDefaultEndpoints();
+
+app.MapClientEndpoints();
 
 
 

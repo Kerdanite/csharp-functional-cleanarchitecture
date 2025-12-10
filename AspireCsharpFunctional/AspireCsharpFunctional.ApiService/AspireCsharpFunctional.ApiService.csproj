@@ -7,11 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CSharpFunctionalExtensions.HttpResults" Version="1.2.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="10.0.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\AspireCsharpFunctional.ServiceDefaults\AspireCsharpFunctional.ServiceDefaults.csproj" />
+    <ProjectReference Include="..\VetCalendar\VetCalendar.Application\VetCalendar.Application.csproj" />
     <ProjectReference Include="..\VetCalendar\VetCalendar.Infrastructure\VetCalendar.Infrastructure.csproj" />
   </ItemGroup>
 

@@ -1,10 +1,11 @@
 ﻿using CSharpFunctionalExtensions;
+using VetCalendar.Application.Abstractions;
 using VetCalendar.Domain;
 using VetCalendar.Domain.Customers;
 
 namespace VetCalendar.Application.CreateClient;
 
-public sealed class CreateClientCommandHandler
+public sealed class CreateClientCommandHandler : ICommandHandler<CreateClientCommand>
 {
     private readonly IClientRepository _clientRepository;
 

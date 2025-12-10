@@ -1,3 +1,6 @@
-﻿namespace VetCalendar.Application.CreateClient;
+﻿using CSharpFunctionalExtensions;
+using VetCalendar.Application.Abstractions;
 
-public sealed record CreateClientCommand(string FirstName, string LastName, string Email, string PhoneNumber);
+namespace VetCalendar.Application.CreateClient;
+
+public sealed record CreateClientCommand(string FirstName, string LastName, string Email, string PhoneNumber): ICommand;
