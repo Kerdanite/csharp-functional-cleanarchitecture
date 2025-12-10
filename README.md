@@ -1,2 +1,2 @@
-# c--functional-cleanarchitecture
+# csharp-functional-cleanarchitecture
 Clean architecture example in C# with functional aproach
