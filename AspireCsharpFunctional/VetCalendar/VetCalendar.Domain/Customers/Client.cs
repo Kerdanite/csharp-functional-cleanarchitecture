@@ -21,23 +21,22 @@ public class Client : AggregateRoot<ClientId>
 
     public static Result<Client> Create(string firstName, string lastName, string email, string phoneNumber)
     {
-        if (string.IsNullOrWhiteSpace(firstName))
-            return Result.Failure<Client>(DomainErrors.Client.FirstNameIsRequired);
-
-        if (string.IsNullOrWhiteSpace(lastName))
-            return Result.Failure<Client>(DomainErrors.Client.LastNameIsRequired);
-
-        if (string.IsNullOrWhiteSpace(email))
-            return Result.Failure<Client>(DomainErrors.Client.EmailIsRequired);
-
-
-        var client = new Client(
-            ClientId.New(),
-            firstName.Trim(),
-            lastName.Trim(),
-            email.Trim(),
-            phoneNumber?.Trim() ?? string.Empty);
-
-        return Result.Success(client);
+        return Result.Success()
+            .Ensure(
+                () => !string.IsNullOrWhiteSpace(firstName),
+                DomainErrors.Client.FirstNameIsRequired)
+            .Ensure(
+                () => !string.IsNullOrWhiteSpace(lastName),
+                DomainErrors.Client.LastNameIsRequired)
+            .Ensure(
+                () => !string.IsNullOrWhiteSpace(email),
+                DomainErrors.Client.EmailIsRequired)
+            .Map(() =>
+                new Client(
+                    ClientId.New(),
+                    firstName,
+                    lastName,
+                    email,
+                    phoneNumber));
     }
 }
