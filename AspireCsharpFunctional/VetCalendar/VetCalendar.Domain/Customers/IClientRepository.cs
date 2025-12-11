@@ -6,4 +6,6 @@ public interface IClientRepository
 
     Task<bool> EmailExistsAsync(string email, CancellationToken ct = default);
     Task<bool> PhoneNumberExistsAsync(string phoneNumber, CancellationToken ct = default);
+
+    Task<Client?> GetByIdAsync(ClientId id, CancellationToken ct = default);
 }

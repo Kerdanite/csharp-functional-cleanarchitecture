@@ -28,4 +28,10 @@ public class ClientRepository : IClientRepository
         return await _db.Clients
             .AnyAsync(c => c.PhoneNumber == phoneNumber, ct);
     }
+
+    public async Task<Client?> GetByIdAsync(ClientId id, CancellationToken ct = default)
+    {
+        return await _db.Clients
+            .FirstOrDefaultAsync(c => c.Id == id, ct);
+    }
 }

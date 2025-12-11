@@ -12,6 +12,7 @@ public static class DomainErrors
         public const string PhoneNumberIsInvalid = "Phone number format is invalid.";
         public const string EmailAlreadyInUse = "A client with this email already exists.";
         public const string PhoneNumberAlreadyInUse = "A client with this phone number already exists.";
+        public const string NotFound = "Client not found.";
     }
 
     public static class Patient

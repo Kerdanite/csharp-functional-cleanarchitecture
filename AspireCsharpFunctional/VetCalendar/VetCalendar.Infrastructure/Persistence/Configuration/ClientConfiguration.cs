@@ -47,7 +47,8 @@ internal sealed class ClientConfiguration : IEntityTypeConfiguration<Client>
             .HasForeignKey("ClientId")
             .OnDelete(DeleteBehavior.Cascade);
         builder.Navigation(c => c.Patients)
-            .UsePropertyAccessMode(PropertyAccessMode.Field);
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .AutoInclude();
 
         builder.HasIndex(c => c.Email).IsUnique();
         builder.HasIndex(c => c.PhoneNumber).IsUnique();

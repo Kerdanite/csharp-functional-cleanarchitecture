@@ -46,8 +46,19 @@ public class Client : AggregateRoot<ClientId>
     public Result<Patient> AddPatient(
         string name,
         string species,
-        DateOnly? birthDate)
+        DateOnly birthDate)
     {
-        throw new NotImplementedException();
+        var nameResult    = PetName.Create(name);
+        var speciesResult = Species.Create(species);
+
+        return Result
+            .Combine(nameResult, speciesResult)
+            .Bind(() =>
+                Patient.Create(
+                    nameResult.Value,
+                    speciesResult.Value,
+                    birthDate))
+
+            .Tap(patient => _patients.Add(patient));
     }
 }
