@@ -1,8 +1,9 @@
 ﻿using CSharpFunctionalExtensions;
+using CSharpFunctionalExtensions.HttpResults.ResultExtensions;
 using Microsoft.AspNetCore.Mvc;
+using System.ComponentModel;
 using VetCalendar.Application.Abstractions;
 using VetCalendar.Application.CreateClient;
-using CSharpFunctionalExtensions.HttpResults.ResultExtensions;
 using VetCalendar.Application.GetClients;
 
 namespace AspireCsharpFunctional.ApiService.Endpoints;
@@ -42,8 +43,12 @@ public static class ClientEndpoints
 
 
     public sealed record CreateClientRequest(
+        [property: DefaultValue("John")]
         string FirstName,
+        [property: DefaultValue("Doe")]
         string LastName,
+        [property: DefaultValue("john.doe@example.com")]
         string Email,
+        [property: DefaultValue("+33601020304")]
         string PhoneNumber);
 }

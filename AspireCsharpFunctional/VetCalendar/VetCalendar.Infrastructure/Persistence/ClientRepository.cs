@@ -15,7 +15,6 @@ public class ClientRepository : IClientRepository
     public async Task AddAsync(Client client, CancellationToken ct = default)
     {
         await _db.Clients.AddAsync(client, ct);
-        await _db.SaveChangesAsync(ct);
     }
 
     public async Task<bool> EmailExistsAsync(string email, CancellationToken ct = default)

@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using VetCalendar.Application.Abstractions;
 using VetCalendar.Domain.Customers;
 using VetCalendar.Infrastructure.Persistence;
 
@@ -20,6 +21,8 @@ public static class DependencyInjection
         {
             options.UseSqlServer(connectionString);
         });
+
+        services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
         services.AddScoped<IClientRepository, ClientRepository>();
 

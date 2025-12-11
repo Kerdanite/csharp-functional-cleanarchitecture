@@ -20,6 +20,7 @@ public static class DependencyInjection
             .WithScopedLifetime());
 
         services.Decorate(typeof(ICommandHandler<>), typeof(LoggingCommandHandler<>));
+        services.Decorate(typeof(ICommandHandler<>), typeof(UnitOfWorkCommandHandlerDecorator<>));
         
         var connectionString = configuration.GetConnectionString("apidb")
                                ?? throw new InvalidOperationException("Connection string 'apidb' not found.");
