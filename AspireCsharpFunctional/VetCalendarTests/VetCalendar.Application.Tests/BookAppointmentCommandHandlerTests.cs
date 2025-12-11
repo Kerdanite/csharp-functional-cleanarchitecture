@@ -103,4 +103,54 @@ public class BookAppointmentCommandHandlerTests
             Times.Never);
     }
 
+    [Fact]
+    public async Task Handle_SlotAlreadyBooked_ReturnsFailure_AndDoesNotPersistAppointment()
+    {
+        var clientResult = Client.Create(
+            firstName: "John",
+            lastName: "Doe",
+            email: "john.doe@example.com",
+            phoneNumber: "+33601020304");
+        var client = clientResult.Value;
+        client.ClearDomainEvents();
+
+        var addPatientResult = client.AddPatient(
+            name: "Misty",
+            species: "Cat",
+            birthDate: new DateOnly(2020, 5, 1));
+        Assert.True(addPatientResult.IsSuccess);
+        var patient = addPatientResult.Value;
+        client.ClearDomainEvents();
+
+        _clientRepositoryMock
+            .Setup(r => r.GetByIdAsync(client.Id, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(client);
+
+        _appointmentRepositoryMock
+            .Setup(r => r.IsSlotAvailableAsync(
+                It.IsAny<DateOnly>(),
+                It.IsAny<TimeOnly>(),
+                It.IsAny<CancellationToken>()))
+            .ReturnsAsync(false);
+
+        var date      = new DateOnly(2025, 1, 10);
+        var startTime = new TimeOnly(9, 0);
+
+        var command = new BookAppointmentCommand(
+            ClientId:  client.Id.Value,
+            PatientId: patient.Id.Value,
+            Date:      date,
+            StartTime: startTime,
+            Reason:    "Vaccination");
+
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(DomainErrors.Appointment.SlotAlreadyBooked, result.Error);
+
+        _appointmentRepositoryMock.Verify(
+            r => r.AddAsync(It.IsAny<Appointment>(), It.IsAny<CancellationToken>()),
+            Times.Never);
+    }
+
 }

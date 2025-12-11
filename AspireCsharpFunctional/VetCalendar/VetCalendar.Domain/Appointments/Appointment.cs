@@ -13,6 +13,8 @@ public class Appointment : AggregateRoot<AppointmentId>
     public string Reason { get; private set; }
     public AppointmentStatus Status { get; private set; }
 
+    private Appointment(){} // EF fait chier faut je trouver un workaround pour s'en passer
+
     private Appointment(
         AppointmentId id,
         ClientId clientId,

@@ -42,6 +42,7 @@ if (app.Environment.IsDevelopment())
 app.MapDefaultEndpoints();
 
 app.MapClientEndpoints();
+app.MapAppointmentEndpoints();
 
 
 

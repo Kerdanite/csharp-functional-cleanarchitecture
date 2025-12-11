@@ -32,14 +32,9 @@ public sealed class BookAppointmentCommandHandler
         return await Maybe.From(async () => await _clientRepository.GetByIdAsync(clientId, cancellationToken))
             .ToResult(DomainErrors.Client.NotFound)
             .Ensure(client => client.Patients.Any(s => s.Id == patientId), DomainErrors.Patient.NotFoundForClient)
-            .Bind(client => AppointmentSlot.Create(
-                    command.Date,
-                    command.StartTime))
-            .Bind(slot => Appointment.Book(
-                    clientId,
-                    patientId,
-                    slot,
-                    command.Reason))
+            .Bind(client => AppointmentSlot.Create(command.Date, command.StartTime))
+            .Ensure(async slot => await _appointmentRepository.IsSlotAvailableAsync(slot.Date, slot.StartTime, cancellationToken), DomainErrors.Appointment.SlotAlreadyBooked)
+            .Bind(slot => Appointment.Book(clientId, patientId, slot, command.Reason))
             .Tap(async appointment => await _appointmentRepository.AddAsync(appointment, cancellationToken));
     }
 }

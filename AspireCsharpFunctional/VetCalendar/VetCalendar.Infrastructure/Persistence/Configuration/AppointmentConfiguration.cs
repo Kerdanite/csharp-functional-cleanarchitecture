@@ -56,6 +56,8 @@ internal sealed class AppointmentConfiguration : IEntityTypeConfiguration<Appoin
                 .HasColumnName("EndTime")
                 .IsRequired();
 
+            slotBuilder.HasIndex(s => new { s.Date, s.StartTime }).IsUnique();
+
             slotBuilder.WithOwner();
         });
 
@@ -69,7 +71,5 @@ internal sealed class AppointmentConfiguration : IEntityTypeConfiguration<Appoin
 
         builder.HasIndex(a => a.ClientId);
         builder.HasIndex(a => a.PatientId);
-        builder.HasIndex("Date", "StartTime");
-      
     }
 }
