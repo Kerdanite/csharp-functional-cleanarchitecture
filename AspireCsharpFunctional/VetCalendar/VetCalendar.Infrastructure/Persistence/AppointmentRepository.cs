@@ -22,10 +22,13 @@ public class AppointmentRepository : IAppointmentRepository
         TimeOnly startTime,
         CancellationToken ct = default)
     {
+        var newEnd = startTime.Add(AppointmentSlot.DefaultDuration);
+
         return !await _db.Appointments
             .AnyAsync(a =>
                     a.Slot.Date == date &&
-                    a.Slot.StartTime == startTime,
+                    a.Slot.StartTime < newEnd &&
+                    a.Slot.EndTime > startTime,
                 ct);
     }
 }

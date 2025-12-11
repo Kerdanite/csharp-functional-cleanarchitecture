@@ -22,6 +22,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Application.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Domain.Tests", "VetCalendar.Domain.Tests\VetCalendar.Domain.Tests.csproj", "{156A65A8-1A21-404B-AA0D-E353EFF1CDEE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Infrastructure.Tests", "VetCalendarTests\VetCalendar.Infrastructure.Tests\VetCalendar.Infrastructure.Tests.csproj", "{C30AE8C3-6F15-4B49-B777-FE8F347803F2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,10 @@ Global
 		{156A65A8-1A21-404B-AA0D-E353EFF1CDEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{156A65A8-1A21-404B-AA0D-E353EFF1CDEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{156A65A8-1A21-404B-AA0D-E353EFF1CDEE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C30AE8C3-6F15-4B49-B777-FE8F347803F2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C30AE8C3-6F15-4B49-B777-FE8F347803F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C30AE8C3-6F15-4B49-B777-FE8F347803F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C30AE8C3-6F15-4B49-B777-FE8F347803F2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -70,6 +76,7 @@ Global
 		{A33A16A5-4B60-4CF5-BF2F-0C8F4038BA5B} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{85CCAAE2-5444-4B8A-8112-AC83A5331D8B} = {E79D431E-F30C-4CE1-B091-144ABAEDA33D}
 		{156A65A8-1A21-404B-AA0D-E353EFF1CDEE} = {E79D431E-F30C-4CE1-B091-144ABAEDA33D}
+		{C30AE8C3-6F15-4B49-B777-FE8F347803F2} = {E79D431E-F30C-4CE1-B091-144ABAEDA33D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01095D7A-36B4-40FD-9915-135FEE3F0F60}

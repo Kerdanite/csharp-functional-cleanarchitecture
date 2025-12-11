@@ -45,8 +45,16 @@ public class BookAppointmentCommandHandlerTests
             .Setup(r => r.GetByIdAsync(client.Id, It.IsAny<CancellationToken>()))
             .ReturnsAsync(client);
 
+       
+
         var date      = new DateOnly(2025, 1, 10);
         var startTime = new TimeOnly(9, 0);
+
+        _appointmentRepositoryMock
+            .Setup(r => r.IsSlotAvailableAsync(date, startTime, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(true);
+
+
         var reason    = "Consultation";
 
         var command = new BookAppointmentCommand(
