@@ -1,8 +1,8 @@
 ﻿using Moq;
 using VetCalendar.Application.AddPatient;
 using VetCalendar.Domain;
-using VetCalendar.Domain.Customers;
-using VetCalendar.Domain.Patients;
+using VetCalendar.Domain.Clients;
+using VetCalendar.Domain.Clients.Patients;
 
 namespace VetCalendar.Application.Tests;
 

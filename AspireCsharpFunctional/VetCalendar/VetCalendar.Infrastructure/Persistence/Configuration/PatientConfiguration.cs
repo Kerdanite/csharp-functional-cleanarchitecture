@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using VetCalendar.Domain.Customers;
-using VetCalendar.Domain.Patients;
+using VetCalendar.Domain.Clients.Patients;
 
 namespace VetCalendar.Infrastructure.Persistence.Configuration;
 

@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using VetCalendar.Application.Abstractions;
 using VetCalendar.Domain;
-using VetCalendar.Domain.Customers;
+using VetCalendar.Domain.Clients;
 
 namespace VetCalendar.Application.CreateClient;
 

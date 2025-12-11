@@ -1,7 +1,7 @@
 ﻿using CSharpFunctionalExtensions;
 using System.Text.RegularExpressions;
 
-namespace VetCalendar.Domain.Customers;
+namespace VetCalendar.Domain.Clients;
 
 public sealed record PhoneNumber
 {

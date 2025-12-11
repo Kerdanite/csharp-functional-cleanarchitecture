@@ -1,9 +1,9 @@
 ﻿using CSharpFunctionalExtensions;
 using CSharpFunctionalExtensions.ValueTasks;
-using VetCalendar.Domain.Patients;
+using VetCalendar.Domain.Clients.Patients;
 using VetCalendar.Domain.Shared;
 
-namespace VetCalendar.Domain.Customers;
+namespace VetCalendar.Domain.Clients;
 
 public class Client : AggregateRoot<ClientId>
 {

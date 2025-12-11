@@ -1,6 +1,6 @@
 ﻿namespace VetCalendar.Domain;
 
-public static class DomainErrors
+public static partial class DomainErrors
 {
     public static class Client
     {

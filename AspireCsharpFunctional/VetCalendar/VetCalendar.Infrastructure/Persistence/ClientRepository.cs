@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VetCalendar.Domain.Customers;
+using VetCalendar.Domain.Clients;
 
 namespace VetCalendar.Infrastructure.Persistence;
 

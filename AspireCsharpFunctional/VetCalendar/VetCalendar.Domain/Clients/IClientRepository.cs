@@ -1,4 +1,4 @@
-﻿namespace VetCalendar.Domain.Customers;
+﻿namespace VetCalendar.Domain.Clients;
 
 public interface IClientRepository
 {

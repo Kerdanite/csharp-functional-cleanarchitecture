@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Storage;
 using VetCalendar.Application.Abstractions;
-using VetCalendar.Domain.Customers;
 using VetCalendar.Domain.Shared;
 
 namespace VetCalendar.Infrastructure.Persistence;

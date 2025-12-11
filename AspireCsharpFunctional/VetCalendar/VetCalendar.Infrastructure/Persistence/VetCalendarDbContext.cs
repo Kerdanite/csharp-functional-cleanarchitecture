@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VetCalendar.Domain.Customers;
-using VetCalendar.Domain.Patients;
+using VetCalendar.Domain.Clients;
+using VetCalendar.Domain.Clients.Patients;
 
 namespace VetCalendar.Infrastructure.Persistence;
 

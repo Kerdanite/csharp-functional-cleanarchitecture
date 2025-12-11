@@ -1,7 +1,7 @@
 ﻿
 using CSharpFunctionalExtensions;
 
-namespace VetCalendar.Domain.Patients;
+namespace VetCalendar.Domain.Clients.Patients;
 
 public class Patient : Shared.Entity<PatientId>
 {

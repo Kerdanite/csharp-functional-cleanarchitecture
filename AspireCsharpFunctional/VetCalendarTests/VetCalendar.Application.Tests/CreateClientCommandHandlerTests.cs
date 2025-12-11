@@ -1,7 +1,7 @@
 ﻿using Moq;
 using VetCalendar.Application.CreateClient;
 using VetCalendar.Domain;
-using VetCalendar.Domain.Customers;
+using VetCalendar.Domain.Clients;
 
 namespace VetCalendar.Application.Tests;
 

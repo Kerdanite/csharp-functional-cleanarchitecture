@@ -1,6 +1,6 @@
-using VetCalendar.Domain.Customers;
+using VetCalendar.Domain.Clients;
 
-namespace VetCalendar.Domain.Tests
+namespace VetCalendar.Domain.Tests.Customers
 {
     public class ClientAddPatientTests
     {

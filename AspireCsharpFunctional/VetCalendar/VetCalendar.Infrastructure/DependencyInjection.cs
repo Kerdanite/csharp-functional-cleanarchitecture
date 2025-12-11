@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VetCalendar.Application.Abstractions;
-using VetCalendar.Domain.Customers;
+using VetCalendar.Domain.Clients;
 using VetCalendar.Infrastructure.Persistence;
 
 namespace VetCalendar.Infrastructure;

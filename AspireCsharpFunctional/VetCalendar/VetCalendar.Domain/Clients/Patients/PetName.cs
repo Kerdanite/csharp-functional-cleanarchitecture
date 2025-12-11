@@ -1,6 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 
-namespace VetCalendar.Domain.Patients;
+namespace VetCalendar.Domain.Clients.Patients;
 
 public sealed record PetName
 {
