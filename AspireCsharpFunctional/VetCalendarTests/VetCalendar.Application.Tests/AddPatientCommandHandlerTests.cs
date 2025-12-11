@@ -2,6 +2,7 @@
 using VetCalendar.Application.AddPatient;
 using VetCalendar.Domain;
 using VetCalendar.Domain.Customers;
+using VetCalendar.Domain.Patients;
 
 namespace VetCalendar.Application.Tests;
 
@@ -114,6 +115,44 @@ public class AddPatientCommandHandlerTests
             Times.Once);
 
         _clientRepositoryMock.VerifyNoOtherCalls();
+    }
+
+
+    [Fact]
+    public async Task Handle_ValidCommand_AddsPatient_And_RaisesPatientAddedEvent()
+    {
+        var clientResult = Client.Create(
+            firstName: "John",
+            lastName: "Doe",
+            email: "john.doe@example.com",
+            phoneNumber: "+33601020304");
+
+        var client = clientResult.Value;
+        client.ClearDomainEvents();
+        var clientId = client.Id;
+
+        _clientRepositoryMock
+            .Setup(r => r.GetByIdAsync(clientId, It.IsAny<CancellationToken>()))
+            .ReturnsAsync(client);
+
+        var command = new AddPatientCommand(
+            ClientId: clientId.Value,
+            Name: "Misty",
+            Species: "Cat",
+            BirthDate: new DateOnly(2020, 5, 12));
+
+        var result = await _sut.Handle(command, CancellationToken.None);
+
+        Assert.True(result.IsSuccess);
+
+        var patient = Assert.Single(client.Patients);
+   
+
+        var patientAddedEvent = Assert.Single(
+            client.DomainEvents.OfType<PatientAddedDomainEvent>());
+
+        Assert.Equal(client.Id, patientAddedEvent.ClientId);
+        Assert.Equal(patient.Id, patientAddedEvent.PatientId);
     }
 
 }

@@ -19,14 +19,6 @@ internal sealed class PatientConfiguration : IEntityTypeConfiguration<Patient>
                 value => new PatientId(value)) 
             .ValueGeneratedNever();
 
-        //builder.Property<Guid>("ClientId");
-
-        //builder
-        //    .HasOne<Client>()               
-        //    .WithMany(c => c.Patients)      
-        //    .HasForeignKey("ClientId")
-        //    .OnDelete(DeleteBehavior.Cascade);
-
         builder.Property(p => p.Name)
             .HasConversion(
                 name => name.Value,                  

@@ -12,6 +12,7 @@ public class VetCalendarDbContext : DbContext
     }
     public DbSet<Client> Clients => Set<Client>();
     public DbSet<Patient> Patients => Set<Patient>();
+    public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

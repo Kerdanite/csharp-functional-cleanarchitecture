@@ -203,6 +203,42 @@ public class CreateClientCommandHandlerTests
                 It.IsAny<CancellationToken>()),
             Times.Never);
     }
+
+    [Fact]
+    public async Task Handle_ValidCommand_CreatesClient_And_RaisesClientCreatedEvent()
+    {
+        var repoMock = new Mock<IClientRepository>();
+
+        Client? savedClient = null;
+
+        repoMock
+            .Setup(r => r.AddAsync(It.IsAny<Client>(), It.IsAny<CancellationToken>()))
+            .Callback<Client, CancellationToken>((c, _) => savedClient = c);
+
+        var handler = new CreateClientCommandHandler(repoMock.Object);
+
+        var command = new CreateClientCommand(
+            FirstName:  "John",
+            LastName:   "Doe",
+            Email:      "john.doe@example.com",
+            PhoneNumber:"+33601020304");
+
+        var result = await handler.Handle(command, CancellationToken.None);
+
+        Assert.True(result.IsSuccess);
+
+        repoMock.Verify(r => r.AddAsync(
+                It.IsAny<Client>(),
+                It.IsAny<CancellationToken>()),
+            Times.Once);
+
+        Assert.NotNull(savedClient);
+
+        var clientCreatedEvent = Assert.Single(
+            savedClient!.DomainEvents.OfType<ClientCreatedDomainEvent>());
+
+        Assert.Equal(savedClient.Id, clientCreatedEvent.ClientId);
+    }
 }
 
 public class CreateClientCommandBuilder

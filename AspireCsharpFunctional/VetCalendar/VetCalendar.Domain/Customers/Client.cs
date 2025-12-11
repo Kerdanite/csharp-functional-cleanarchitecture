@@ -40,7 +40,8 @@ public class Client : AggregateRoot<ClientId>
                 firstName.Trim(),
                 lastName.Trim(),
                 tuple.Email,
-                tuple.Phone));
+                tuple.Phone))
+            .Tap(client => client.AddDomainEvent(new ClientCreatedDomainEvent(client.Id)));
     }
 
     public Result<Patient> AddPatient(
@@ -58,7 +59,7 @@ public class Client : AggregateRoot<ClientId>
                     nameResult.Value,
                     speciesResult.Value,
                     birthDate))
-
-            .Tap(patient => _patients.Add(patient));
+            .Tap(patient => _patients.Add(patient))
+            .Tap(patient => AddDomainEvent(new PatientAddedDomainEvent(Id, patient.Id)));
     }
 }
