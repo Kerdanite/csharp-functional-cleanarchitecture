@@ -21,5 +21,6 @@ public static partial class DomainErrors
         public const string NameTooLong      = "Patient name is too long.";
         public const string SpeciesIsRequired = "Species is required.";
         public const string SpeciesTooLong   = "Species is too long.";
+        public const string NotFoundForClient = "Patient not found for the specified client.";
     }
 }

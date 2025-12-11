@@ -6,29 +6,22 @@ public sealed record AppointmentSlot
 {
     public DateOnly Date { get; }
     public TimeOnly StartTime { get; }
-    public TimeSpan Duration { get; }
 
-    private AppointmentSlot(DateOnly date, TimeOnly startTime, TimeSpan duration)
+    public static readonly TimeSpan DefaultDuration = TimeSpan.FromMinutes(30);
+
+    private AppointmentSlot(DateOnly date, TimeOnly startTime)
     {
         Date      = date;
         StartTime = startTime;
-        Duration  = duration;
+        EndTime = StartTime.Add(DefaultDuration);
     }
 
     public static Result<AppointmentSlot> Create(
         DateOnly date,
-        TimeOnly startTime,
-        TimeSpan duration)
+        TimeOnly startTime)
     {
-        return Result.Success()
-            .Ensure(
-                () => duration > TimeSpan.Zero,
-                DomainErrors.Appointment.DurationMustBePositive)
-            .Ensure(
-                () => duration <= TimeSpan.FromHours(4),
-                DomainErrors.Appointment.DurationTooLong)
-            .Map(() => new AppointmentSlot(date, startTime, duration));
+        return Result.Success(new AppointmentSlot(date, startTime));
     }
 
-    public TimeOnly EndTime => StartTime.Add(Duration);
+    public TimeOnly EndTime { get; }
 }

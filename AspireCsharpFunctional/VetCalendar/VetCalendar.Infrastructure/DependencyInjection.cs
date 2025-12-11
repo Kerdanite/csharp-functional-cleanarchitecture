@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using VetCalendar.Application.Abstractions;
+using VetCalendar.Domain.Appointments;
 using VetCalendar.Domain.Clients;
 using VetCalendar.Infrastructure.Persistence;
 
@@ -25,6 +26,7 @@ public static class DependencyInjection
         services.AddScoped<IUnitOfWork, EfUnitOfWork>();
 
         services.AddScoped<IClientRepository, ClientRepository>();
+        services.AddScoped<IAppointmentRepository, AppointmentRepository>();
 
         return services;
     }

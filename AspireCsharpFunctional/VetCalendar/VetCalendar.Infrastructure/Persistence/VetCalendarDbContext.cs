@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using VetCalendar.Domain.Appointments;
 using VetCalendar.Domain.Clients;
 using VetCalendar.Domain.Clients.Patients;
 
@@ -13,6 +14,7 @@ public class VetCalendarDbContext : DbContext
     public DbSet<Client> Clients => Set<Client>();
     public DbSet<Patient> Patients => Set<Patient>();
     public DbSet<OutboxMessage> OutboxMessages => Set<OutboxMessage>();
+    public DbSet<Appointment> Appointments => Set<Appointment>();
 
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

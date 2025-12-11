@@ -14,9 +14,8 @@ public class AppointmentBookTests
 
         var date = new DateOnly(2025, 1, 10);
         var startTime = new TimeOnly(9, 0);
-        var duration = TimeSpan.FromMinutes(30);
 
-        var slotResult = AppointmentSlot.Create(date, startTime, duration);
+        var slotResult = AppointmentSlot.Create(date, startTime);
         Assert.True(slotResult.IsSuccess); 
         var slot = slotResult.Value;
 
@@ -48,8 +47,7 @@ public class AppointmentBookTests
 
         var slotResult = AppointmentSlot.Create(
             new DateOnly(2025, 1, 10),
-            new TimeOnly(9, 0),
-            TimeSpan.FromMinutes(30));
+            new TimeOnly(9, 0));
 
         Assert.True(slotResult.IsSuccess);
         var slot = slotResult.Value;
@@ -76,8 +74,7 @@ public class AppointmentBookTests
 
         var slotResult = AppointmentSlot.Create(
             new DateOnly(2025, 1, 10),
-            new TimeOnly(9, 0),
-            TimeSpan.FromMinutes(30));
+            new TimeOnly(9, 0));
 
         Assert.True(slotResult.IsSuccess);
         var slot = slotResult.Value;
@@ -94,5 +91,36 @@ public class AppointmentBookTests
 
         var appointment = result.Value;
         Assert.Equal(string.Empty, appointment.Reason);
+    }
+
+    [Fact]
+    public void Book_ValidData_RaisesAppointmentBookedDomainEvent()
+    {
+        var clientId  = ClientId.New();
+        var patientId = PatientId.New();
+
+        var slotResult = AppointmentSlot.Create(
+            new DateOnly(2025, 1, 10),
+            new TimeOnly(9, 0));
+
+        Assert.True(slotResult.IsSuccess);
+        var slot = slotResult.Value;
+
+        var reason = "Consultation générale";
+
+        var result = Appointment.Book(
+            clientId,
+            patientId,
+            slot,
+            reason);
+
+        Assert.True(result.IsSuccess);
+
+        var appointment = result.Value;
+
+        var evt = Assert.Single(
+            appointment.DomainEvents.OfType<AppointmentBookedDomainEvent>());
+
+        Assert.Equal(appointment.Id, evt.AppointmentId);
     }
 }
