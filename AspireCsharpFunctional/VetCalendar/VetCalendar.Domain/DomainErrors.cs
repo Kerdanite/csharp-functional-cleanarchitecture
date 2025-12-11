@@ -13,4 +13,12 @@ public static class DomainErrors
         public const string EmailAlreadyInUse = "A client with this email already exists.";
         public const string PhoneNumberAlreadyInUse = "A client with this phone number already exists.";
     }
+
+    public static class Patient
+    {
+        public const string NameIsRequired   = "Patient name is required.";
+        public const string NameTooLong      = "Patient name is too long.";
+        public const string SpeciesIsRequired = "Species is required.";
+        public const string SpeciesTooLong   = "Species is too long.";
+    }
 }

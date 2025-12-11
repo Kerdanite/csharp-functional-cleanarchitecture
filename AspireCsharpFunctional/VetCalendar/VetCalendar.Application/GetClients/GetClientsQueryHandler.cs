@@ -17,12 +17,20 @@ public class GetClientsQueryHandler : IQueryHandler<GetClientsQuery, IReadOnlyLi
     {
         const string sql = @"
             SELECT
-                Id,
-                FirstName,
-                LastName,
-                Email,
-                PhoneNumber
-            FROM Clients";
+            c.Id,
+            c.FirstName,
+            c.LastName,
+            c.Email,
+            c.PhoneNumber,
+            COUNT(p.Id) AS PatientsCount
+        FROM Clients c
+        LEFT JOIN Patients p ON p.ClientId = c.Id
+        GROUP BY
+            c.Id,
+            c.FirstName,
+            c.LastName,
+            c.Email,
+            c.PhoneNumber";
 
         using var connection = _connectionFactory.CreateOpenConnection(cancellationToken);
 

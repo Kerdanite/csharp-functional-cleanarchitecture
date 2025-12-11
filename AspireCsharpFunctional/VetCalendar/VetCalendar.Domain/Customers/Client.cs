@@ -1,5 +1,6 @@
 ﻿using CSharpFunctionalExtensions;
 using CSharpFunctionalExtensions.ValueTasks;
+using VetCalendar.Domain.Patients;
 using VetCalendar.Domain.Shared;
 
 namespace VetCalendar.Domain.Customers;
@@ -10,6 +11,9 @@ public class Client : AggregateRoot<ClientId>
     public string LastName   { get; private set; } 
     public PhoneNumber PhoneNumber { get; private set; }
     public Email Email { get; private set; }
+
+    private readonly List<Patient> _patients = new();
+    public IReadOnlyCollection<Patient> Patients => _patients.AsReadOnly();
 
     private Client(ClientId id, string firstName, string lastName, Email email, PhoneNumber phoneNumber)
     {
@@ -37,5 +41,13 @@ public class Client : AggregateRoot<ClientId>
                 lastName.Trim(),
                 tuple.Email,
                 tuple.Phone));
+    }
+
+    public Result<Patient> AddPatient(
+        string name,
+        string species,
+        DateOnly? birthDate)
+    {
+        throw new NotImplementedException();
     }
 }

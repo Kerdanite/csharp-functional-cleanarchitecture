@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using VetCalendar.Domain.Customers;
+using VetCalendar.Domain.Patients;
 
 namespace VetCalendar.Infrastructure.Persistence.Configuration;
 
@@ -33,13 +34,20 @@ internal sealed class ClientConfiguration : IEntityTypeConfiguration<Client>
             .IsRequired()
             .HasMaxLength(254);
 
-        // PhoneNumber (VO) mappé sur string
         builder.Property(c => c.PhoneNumber)
             .HasConversion(
                 phone => phone.Value,                  
                 value => PhoneNumber.Create(value).Value) 
             .IsRequired()
             .HasMaxLength(50);
+
+        builder
+            .HasMany(c => c.Patients)
+            .WithOne()
+            .HasForeignKey("ClientId")
+            .OnDelete(DeleteBehavior.Cascade);
+        builder.Navigation(c => c.Patients)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
 
         builder.HasIndex(c => c.Email).IsUnique();
         builder.HasIndex(c => c.PhoneNumber).IsUnique();
