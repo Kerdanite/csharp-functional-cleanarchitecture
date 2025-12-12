@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\VetCalendar\VetCalendar.Domain\VetCalendar.Domain.csproj" />
+    <ProjectReference Include="..\..\VetCalendar\VetCalendar.Domain\VetCalendar.Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
