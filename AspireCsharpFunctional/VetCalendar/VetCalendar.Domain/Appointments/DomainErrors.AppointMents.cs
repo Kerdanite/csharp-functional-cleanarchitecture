@@ -7,5 +7,6 @@ public static partial class DomainErrors
         public const string ReasonTooLong          = "Appointment reason is too long.";
         public const string SlotAlreadyBooked    = "This appointment slot is already booked.";
         public const string InvalidStartMinute = "Appointments must start on minute 00 or 30.";
+        public const string InvalidStartTime = "Appointments must start on an exact half-hour (00 or 30).";
     }
 }

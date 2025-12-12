@@ -4,6 +4,7 @@ using AspireCsharpFunctional.ApiService.Request;
 using VetCalendar.Application.Abstractions;
 using VetCalendar.Application.AddPatient;
 using VetCalendar.Application.CreateClient;
+using VetCalendar.Application.GetClientPatients;
 using VetCalendar.Application.GetClients;
 
 namespace AspireCsharpFunctional.ApiService.Endpoints;
@@ -55,6 +56,18 @@ public static class ClientEndpoints
 
             return result.ToNoContentHttpResult();
         });
+
+
+        group.MapGet("/{id:guid}/patients", async (Guid id,
+                IQueryHandler<GetClientPatientsQuery, IReadOnlyList<PatientDto>> handler,
+                CancellationToken ct) =>
+            {
+                var result = await handler.Handle(new GetClientPatientsQuery(id), ct);
+
+                return result.ToOkHttpResult(); 
+            })
+            .WithName("GetClientPatients");
+        ;
 
         return app;
     }

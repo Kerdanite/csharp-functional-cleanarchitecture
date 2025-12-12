@@ -31,4 +31,19 @@ public class AppointmentSlotTests
         Assert.True(result.IsFailure);
         Assert.Equal(DomainErrors.Appointment.InvalidStartMinute, result.Error);
     }
+
+    [Theory]
+    [InlineData(9, 0, 1, 0)]
+    [InlineData(9, 0, 0, 1)]
+    [InlineData(9, 0, 50, 0)]
+    public void Create_InvalidWithSecond_ReturnsFailure(int hour, int minute, int second, int milliSecond)
+    {
+        var date = new DateOnly(2025, 1, 10);
+        var start = new TimeOnly(hour, minute, second, milliSecond);
+
+        var result = AppointmentSlot.Create(date, start);
+
+        Assert.True(result.IsFailure);
+        Assert.Equal(DomainErrors.Appointment.InvalidStartTime, result.Error);
+    }
 }

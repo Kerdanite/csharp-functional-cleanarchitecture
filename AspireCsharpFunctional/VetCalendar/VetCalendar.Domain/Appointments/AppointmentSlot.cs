@@ -29,6 +29,7 @@ public sealed record AppointmentSlot
         // donc Ensure ce cas
         return Result.Success(startTime)
             .Ensure(t => t.Minute is 0 or 30, DomainErrors.Appointment.InvalidStartMinute)
+            .Ensure(t => t == new TimeOnly(t.Hour, t.Minute), DomainErrors.Appointment.InvalidStartTime)
             .Map(t => new AppointmentSlot(date, startTime, startTime.Add(DefaultDuration)));
     }
 }
