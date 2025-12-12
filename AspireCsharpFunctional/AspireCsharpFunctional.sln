@@ -20,7 +20,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "VetCalendarTests", "VetCale
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Application.Tests", "VetCalendarTests\VetCalendar.Application.Tests\VetCalendar.Application.Tests.csproj", "{85CCAAE2-5444-4B8A-8112-AC83A5331D8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Domain.Tests", "VetCalendar.Domain.Tests\VetCalendar.Domain.Tests.csproj", "{156A65A8-1A21-404B-AA0D-E353EFF1CDEE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Domain.Tests", "VetCalendarTests\VetCalendar.Domain.Tests\VetCalendar.Domain.Tests.csproj", "{156A65A8-1A21-404B-AA0D-E353EFF1CDEE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetCalendar.Infrastructure.Tests", "VetCalendarTests\VetCalendar.Infrastructure.Tests\VetCalendar.Infrastructure.Tests.csproj", "{C30AE8C3-6F15-4B49-B777-FE8F347803F2}"
 EndProject
